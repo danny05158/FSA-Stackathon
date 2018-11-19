@@ -12,6 +12,7 @@ function parceJson(json) {
     if (results1[i].includes('SocialTag')) {
       key.push(results1[i])
     }
+
   }
   for (let i = 0; i < key.length; i++) {
     if (json[key[i]]) {
@@ -19,11 +20,14 @@ function parceJson(json) {
     }
   }
 
-let final = {}
-for(let i=0; i<importantObjs.length; i++){
-  final[importantObjs[i].name] = importantObjs[i].importance
+ let final = []
+ for(let i=0; i<importantObjs.length; i++){
+  final.push({
+    name: importantObjs[i].name,
+    importance: Number(importantObjs[i].importance)
+  })
+
 }
-  console.log(final)
   return final /// returns the obj with social tags
 }
 
@@ -40,6 +44,7 @@ router.post('/', async function(req, res) {
       .set('X-AG-Access-Token', TOKEN)
       .set('x-calais-selectiveTags', 'socialtags')
       .then(response => {
+        console.log("Response", response)
         let result = parceJson(response.body)
         res.send(result)
       })

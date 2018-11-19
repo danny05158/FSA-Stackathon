@@ -9,7 +9,6 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {submitData} from '../store/search'
 import Chart from './Chart'
@@ -72,27 +71,16 @@ const styles = theme => ({
   },
 });
 
-const data = {
- Business: '1',
-  Economy: '1',
-  Technology: '1',
-  'Economy of New York City': '2',
-  NASDAQ: '2',
-  Microsoft: '2',
-  'Market capitalization': '2',
-  Google: '2'
-}
-
 export class SearchBar extends React.Component {
   constructor(){
     super()
     this.state = {
-      search: []
+      search: [],
+      visibility: false
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
-  
 
   handleChange(event) {
     event.preventDefault()
@@ -104,6 +92,9 @@ export class SearchBar extends React.Component {
   handleSubmit(event) {
     event.preventDefault()
     this.props.submitData(this.state.search)
+    this.setState({
+      visibility: true
+    })
   }
 
   render() {
@@ -117,12 +108,13 @@ export class SearchBar extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-              Input Text To Search
+              Input Text To Analyse
             </Typography>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>
+
               <form onSubmit={this.handleSubmit}>
               <InputBase
                 placeholder="Search…"
@@ -135,16 +127,13 @@ export class SearchBar extends React.Component {
               />
               </form>
             </div>
-            <div className={classes.grow} />
-            <div className={classes.sectionDesktop}>
 
-            </div>
-            <div className={classes.sectionMobile}>
-
-            </div>
           </Toolbar>
-        </AppBar>
-        <Chart data={data}/>
+          </AppBar>
+          {this.state.visibility ?
+             <Chart /> : <div />
+          }
+
       </div>
 
 
