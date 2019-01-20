@@ -20,7 +20,7 @@ import MenuList from '@material-ui/core/MenuList'
 const styles = theme => ({
   root: {
     width: '100%'
-  },
+  }
 })
 
 class Navbar extends Component {
@@ -91,6 +91,7 @@ class Navbar extends Component {
                         <ClickAwayListener onClickAway={this.handleClose}>
                           <MenuList>
                             <div>
+
                               <MenuItem onClick={this.handleClose}>
                                 <Link to="/" style={{textDecoration: 'none'}}>
                                   Home
@@ -105,8 +106,8 @@ class Navbar extends Component {
                                   Search
                                 </Link>
                               </MenuItem>
+
                             </div>
-                            {/* )} */}
                           </MenuList>
                         </ClickAwayListener>
                       </Paper>
