@@ -9,8 +9,8 @@ const submit = data => ({type: SUBMIT_DATA, data})
 //THUNK CREATORS
 export const submitData = input => async dispatch => {
   try{
-    console.log("thunk", typeof input)
     const {data} = (await axios.post('/api/thomsonreuters', input))
+    console.log("In the thunk", data)
     dispatch(submit(data))
   }catch(err) {
     console.log(err)

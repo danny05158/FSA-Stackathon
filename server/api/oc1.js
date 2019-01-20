@@ -44,7 +44,6 @@ router.post('/', async function(req, res) {
       .set('X-AG-Access-Token', TOKEN)
       .set('x-calais-selectiveTags', 'socialtags')
       .then(response => {
-        console.log("Response", response)
         let result = parceJson(response.body)
         res.send(result)
       })
